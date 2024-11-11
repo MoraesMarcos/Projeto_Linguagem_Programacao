@@ -1,0 +1,53 @@
+def exibir_menu():
+    print("\nO que deseja?")
+    print("[1] Pesquisar contato")
+    print("[2] Cadastrar contato")
+    print("[3] Deletar todos os contatos")
+    print("[4] Sair")
+
+def pesquisar_contato():
+    with open("contato.txt", "r") as f:
+        conteudo = f.read()
+        if conteudo:
+            print("\n--- Contatos Cadastrados ---")
+            print(conteudo)
+        else:
+            print("\nNenhum contato cadastrado no momento.")
+
+def cadastrar_contato():
+    with open("contato.txt", "a") as f:
+        nome = input("Digite seu nome: ")
+        numero = input("Digite seu número de contato: ")
+        cpf = input("Digite seu CPF: ")
+        # Escreve os dados no arquivo
+        f.write(f"Nome: {nome}\n")
+        f.write(f"Contato: {numero}\n")
+        f.write(f"CPF: {cpf}\n")
+        f.write("-" * 20 + "\n")
+        print("\nContato cadastrado com sucesso!")
+
+def deletar_contatos():
+    with open("contato.txt", "w") as f:
+        pass  # Isso limpa o arquivo
+    print("Todos os contatos foram deletados com sucesso.")
+
+# Loop principal
+while True:
+    exibir_menu()
+    try:
+        opcao_inicial = int(input("Digite o número da opção desejada: "))
+    except ValueError:
+        print("Por favor, digite um número válido.")
+        continue
+
+    if opcao_inicial == 1:
+        pesquisar_contato()
+    elif opcao_inicial == 2:
+        cadastrar_contato()
+    elif opcao_inicial == 3:
+        deletar_contatos()
+    elif opcao_inicial == 4:
+        print("Saindo do programa... Até logo!")
+        break
+    else:
+        print("Opção inválida. Por favor, escolha uma opção entre 1 e 4.")
